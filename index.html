@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Vintage Rabbit Co — Tienda</title>
+<meta name="description" content="Cuidado botánico, hecho a mano en Caracas. Vegano · Cruelty-free · Natural.">
+<meta property="og:title" content="The Vintage Rabbit Co — Tienda">
+<meta property="og:description" content="Cuidado botánico, hecho a mano en Caracas.">
+<meta property="og:image" content="images/hero.jpg">
+<meta name="theme-color" content="#100B07">
+<link rel="icon" href="images/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ground:#F4F2EE;--ink:#141210;--night:#100B07;--muted:#6A645C;--muted2:#4A443C;--line:#E4DFD6;--field:#DAD4C9;--wa:#1E7A4C;--ok:#3F6B45;--serif:'Cormorant Garamond',Georgia,serif}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--ground);color:var(--ink);font-family:'Manrope','Helvetica Neue',Arial,sans-serif;font-size:15px;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;color:inherit}
+button:disabled{cursor:not-allowed;opacity:.4}
+a{color:var(--ink)}
+input,select{font-family:inherit;font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--field);border-radius:12px;padding:12px;width:100%;outline:none}
+input:focus,select:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(20,18,16,.12)}
+.app{max-width:480px;margin:0 auto;height:100vh;height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden;background:var(--ground)}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top));background:var(--night);color:var(--ground)}
+header .logo{width:40px;height:36px;object-fit:contain}
+header .brand{flex:1;display:flex;flex-direction:column}
+header .brand b{font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.05}
+header .brand span{font-size:11px;color:#BDB5A8;letter-spacing:.4px}
+header .title{flex:1;font-family:var(--serif);font-size:24px;font-weight:600}
+.icon-btn{width:44px;height:44px;border:none;background:transparent;display:flex;align-items:center;justify-content:center;color:var(--ground)}
+.cart-btn{position:relative;border:1px solid #4A443C;border-radius:22px}
+.badge{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--ground);color:var(--night);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.steps{display:flex;gap:6px;padding:12px 16px 0}
+.steps div{flex:1;display:flex;flex-direction:column;gap:5px;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.steps i{height:3px;border-radius:2px;background:var(--field)}
+.steps i.on{background:var(--ink)}
+main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.hero{padding:16px 16px 4px;display:flex;flex-direction:column;gap:12px}
+.hero img{width:100%;height:150px;object-fit:cover;border-radius:18px;display:block}
+.hero h1{margin:0;font-family:var(--serif);font-size:32px;line-height:1.02;font-weight:500}
+.hero h1 em{color:var(--muted)}
+.hero p{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
+.cats{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;position:sticky;top:0;background:var(--ground);z-index:2;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.chip{flex:none;height:38px;padding:0 16px;border-radius:19px;border:1px solid var(--field);background:#fff;font-size:14px}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.rate{margin:0 16px 4px;font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:6px 16px 110px}
+.card{display:flex;flex-direction:column;background:#fff;border-radius:18px;overflow:hidden;position:relative}
+.card .ph{height:150px;display:flex;align-items:center;justify-content:center;position:relative}
+.card .ph img.rect{width:100%;height:150px;object-fit:cover;display:block}
+.round{width:124px;height:124px;border-radius:50%;object-fit:cover;display:block}
+.mark{width:124px;height:124px;border-radius:50%;background:var(--night);display:flex;align-items:center;justify-content:center}
+.mark img{width:50%;height:auto}
+.soldout .ph>*{filter:grayscale(1);opacity:.55}
+.so-tag{position:absolute;top:10px;left:10px;background:var(--night);color:var(--ground);font-size:11px;letter-spacing:.8px;text-transform:uppercase;padding:5px 9px;border-radius:12px;z-index:1}
+.cb{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;flex:1}
+.tag{font-size:10px;letter-spacing:.9px;text-transform:uppercase;color:var(--muted)}
+.name{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1.08}
+.sub{font-size:12px;color:var(--muted);line-height:1.35}
+.price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.price b{font-size:15px}
+.price small{font-size:11px;color:var(--muted)}
+.btn{height:40px;border-radius:20px;border:none;background:var(--ink);color:var(--ground);font-size:14px;font-weight:500;margin-top:8px;width:100%}
+.btn-o{height:40px;border-radius:20px;border:1px solid var(--ink);color:var(--ink);font-size:14px;font-weight:500;margin-top:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;background:transparent;width:100%}
+.stepper{margin-top:8px;height:40px;border-radius:20px;background:var(--ink);color:var(--ground);display:flex;align-items:center;justify-content:space-between}
+.stepper button{width:44px;height:40px;border:none;background:transparent;color:var(--ground);font-size:20px}
+.sec{padding:16px 16px 130px;display:flex;flex-direction:column;gap:18px}
+.sec h2{margin:0;font-family:var(--serif);font-size:22px;font-weight:600}
+.grp{display:flex;flex-direction:column;gap:10px}
+.hint{font-size:12px;color:var(--muted);line-height:1.4}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted2)}
+.line{display:flex;gap:12px;padding:12px;background:#fff;border-radius:18px;align-items:center}
+.line .th{width:60px;height:60px;flex:none;border-radius:50%;object-fit:cover}
+.line .mk{width:60px;height:60px;flex:none;border-radius:50%;background:var(--night);display:flex;align-items:center;justify-content:center}
+.line .mk img{width:52%}
+.qty{display:flex;align-items:center;gap:4px;margin-top:4px}
+.qty button{width:34px;height:34px;border-radius:17px;border:1px solid var(--field);background:#fff;font-size:17px}
+.qty span{min-width:26px;text-align:center;font-weight:600}
+.link{border:none;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;padding:6px 0}
+.sum{display:flex;flex-direction:column;gap:6px}
+.row{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.row.promo{color:var(--ok)}
+.row.big{font-size:17px;font-weight:600}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;padding:15px;border-radius:16px;border:1px solid var(--field);background:#fff;width:100%}
+.opt.on{border:2px solid var(--ink);padding:14px}
+.opt .dot{width:18px;height:18px;flex:none;border-radius:50%;border:1.5px solid #A39B8F}
+.opt.on .dot{border:5px solid var(--ink)}
+.opt b{display:block;font-size:15px;font-weight:600}
+.opt small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.bands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.band{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;padding:13px;border-radius:14px;border:1px solid var(--field);background:#fff}
+.band.on{border:2px solid var(--ink);padding:12px}
+.band.wide{grid-column:span 2}
+.band small{font-size:12px;color:var(--muted)}
+.geo{height:46px;border-radius:23px;border:1px solid var(--ink);background:#fff;font-size:14px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:8px;width:100%}
+.pays{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.pay{height:56px;border-radius:16px;border:1px solid var(--field);background:#fff;font-size:15px}
+.pay.on{border:2px solid var(--ink);font-weight:600}
+.paybox{padding:16px;border-radius:16px;background:var(--night);color:var(--ground);display:flex;flex-direction:column;gap:6px;font-size:14px}
+.paybox .k{font-size:11px;letter-spacing:.9px;text-transform:uppercase;color:#BDB5A8}
+.paybox .m{font-size:13px;color:#D9D2C6}
+.paybox .m b{color:var(--ground)}
+.copy{align-self:flex-start;margin-top:4px;height:36px;padding:0 16px;border-radius:18px;border:1px solid var(--muted);background:transparent;color:var(--ground);font-size:13px}
+.box{display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:18px;background:#fff}
+.hr{height:1px;background:var(--line);margin:4px 0}
+.err{padding:12px 14px;border-radius:14px;background:#FBE9E6;color:#7A2418;font-size:13px;line-height:1.45}
+.bar{position:absolute;left:0;right:0;bottom:0;padding:10px 16px calc(20px + env(safe-area-inset-bottom));background:var(--ground);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.bar.float{background:transparent;border:none}
+.cta{width:100%;height:56px;border-radius:28px;border:none;background:var(--ink);color:var(--ground);font-size:16px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none}
+.cta.split{justify-content:space-between;padding:0 22px;box-shadow:0 8px 24px rgba(16,11,7,.25)}
+.cta.wa{background:var(--wa);color:#fff}
+.bar .note{font-size:12px;color:var(--muted);text-align:center}
+.done{padding:56px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.done .mk{width:76px;height:76px;border-radius:50%;background:var(--night);display:flex;align-items:center;justify-content:center}
+.done .mk img{width:55%}
+.done h2{margin:0;font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.1}
+.done p{margin:0;font-size:14px;color:var(--muted2);line-height:1.5}
+.sheet-wrap{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;justify-content:flex-end}
+.scrim{position:absolute;inset:0;border:none;background:rgba(16,11,7,.55)}
+.sheet{position:relative;max-height:88%;overflow-y:auto;background:var(--ground);border-radius:24px 24px 0 0;padding:18px 18px calc(22px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px}
+.sh-head{display:flex;gap:14px;align-items:center}
+.sh-head .th{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none}
+.sh-head .mk{width:84px;height:84px;border-radius:50%;background:var(--night);flex:none;display:flex;align-items:center;justify-content:center}
+.sh-head .mk img{width:52%}
+.sh-head .name{font-size:26px}
+.x{align-self:flex-start;width:40px;height:40px;border-radius:20px;border:1px solid var(--field);background:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{min-height:44px;padding:8px 16px;border-radius:22px;border:1px solid var(--field);background:#fff;font-size:14px;text-align:left}
+.pill.on{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.pill:disabled{text-decoration:line-through}
+.addrow{display:flex;align-items:center;gap:12px;margin-top:4px}
+.qbox{height:52px;border-radius:26px;border:1px solid var(--field);background:#fff;display:flex;align-items:center}
+.qbox button{width:46px;height:50px;border:none;background:transparent;font-size:20px}
+.qbox span{min-width:22px;text-align:center;font-weight:600}
+.addrow .cta{height:52px;flex:1;font-size:15px}
+.left{font-size:12px;color:#7A2418}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+// ====== CONFIGURACIÓN ======
+const API = "https://script.google.com/macros/s/AKfycbxSi_JU7wsyVQK737AJdsBfR5iGAL2hQeVtMhXUqHz2bzHEsTZaaqMiAr5B8UkUqw/exec"; // URL de la aplicación web de Google Apps Script
+const WHATSAPP = "584241656454";
+const SHOP = { lat: 10.404947, lng: -66.844325 }; // El Hatillo
+const CATALOG = [{"id": "j1", "cat": "jabones", "tag": "Baño · por unidad", "name": "Jabón natural", "sub": "2 × $18 · 3 × $25", "img": "jabon.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 9.5}], "deal": "jabon", "desc": "Saponificados en frío con aceites y mantecas 100% naturales: oliva, coco, karité y cacao. Aptos para piel sensible y biodegradables. Variedades según temporada: indica tus aromas preferidos en las notas del pedido. Promo: 2 jabones $18 · 3 jabones $25."}, {"id": "j2", "cat": "jabones", "tag": "Sin fragancia", "name": "Bebés y niños", "sub": "Oliva, coco y karité orgánicos", "img": "bebes.jpg", "opts": [{"label": "Unidad", "price": 15}], "desc": "Oliva, coco y karité orgánicos. Cuida la barrera de la piel."}, {"id": "c1", "cat": "cuerpo", "tag": "Hidratante ligero", "name": "Soufflé", "sub": "Se derrite al tocar la piel", "img": "souffle.jpg", "optName": "Tamaño", "opts": [{"label": "2 oz", "price": 15}, {"label": "4 oz", "price": 23}, {"label": "8 oz", "price": 45}], "desc": "Hidratante corporal ligero que se derrite al tocar la piel."}, {"id": "c2", "cat": "cuerpo", "tag": "Hidratante intenso", "name": "Body Butter", "sub": "Se transforma en aceite", "img": "butter.jpg", "optName": "Tamaño", "opts": [{"label": "2 oz", "price": 15}, {"label": "4 oz", "price": 23}, {"label": "8 oz", "price": 45}], "desc": "Hidratante corporal intenso que se transforma en aceite sobre la piel."}, {"id": "c3", "cat": "cuerpo", "tag": "Nuevo · hidratante sólido", "name": "Lotion Bar", "sub": "Fácil de llevar", "img": "lotionbar.jpg", "opts": [{"label": "Unidad", "price": 20}], "desc": "Se funde con el calor de la piel, fácil de llevar."}, {"id": "c4", "cat": "cuerpo", "tag": "Exfoliante · 3 variedades", "name": "Body Scrub", "sub": "Con cucharita de madera", "img": "scrub.jpg", "optName": "Tamaño", "opts": [{"label": "4 oz", "price": 12}, {"label": "8 oz", "price": 18}, {"label": "16 oz", "price": 32}], "varName": "Variedad", "vars": ["Café dulce", "Rosé", "Coco dulce"], "desc": "Exfoliante corporal con cucharita de madera."}, {"id": "c5", "cat": "cuerpo", "tag": "Barra", "name": "Desodorante", "sub": "Sin aluminio ni parabenos", "img": "deo.jpg", "opts": [{"label": "Unidad", "price": 12}], "desc": "Desodorante en barra, sin aluminio ni parabenos."}, {"id": "c6", "cat": "cuerpo", "tag": "Roll-on 10 ml", "name": "Perfume Oil", "sub": "2 × $28", "img": "perfume.jpg", "opts": [{"label": "Unidad", "price": 15}], "deal": "perfume", "desc": "Aceite perfumado en roll-on de 10 ml. Promo: 2 por $28."}, {"id": "c7", "cat": "cuerpo", "tag": "Bálsamo", "name": "Tattoo Balm", "sub": "Calma y cuida el color", "img": "tattoo.jpg", "optName": "Presentación", "opts": [{"label": "Barra", "price": 15}, {"label": "Lata", "price": 20}], "desc": "Bálsamo para tatuajes: calma y cuida el color."}, {"id": "c8", "cat": "cuerpo", "tag": "Bálsamo", "name": "All Over Balm", "sub": "Zonas secas", "img": "allover.jpg", "optName": "Presentación", "opts": [{"label": "Barra", "price": 15}, {"label": "Lata", "price": 20}], "desc": "Bálsamo para todo: cara, cuerpo y zonas secas."}, {"id": "r1", "cat": "rostro", "tag": "01 Limpiar", "name": "Face Bar", "sub": "Karité y arcilla marroquí", "img": "facebar.jpg", "opts": [{"label": "Unidad", "price": 11}], "desc": "Jabón facial de karité y arcilla marroquí."}, {"id": "r2", "cat": "rostro", "tag": "02 Exfoliar", "name": "Face Scrub", "sub": "Arroz · 2 oz", "img": "facescrub.jpg", "opts": [{"label": "Unidad", "price": 12}], "desc": "Exfoliante facial de arroz, 2 oz."}, {"id": "r3", "cat": "rostro", "tag": "03 Refrescar", "name": "Face Mist", "sub": "Hidrata y calma · 2 oz", "img": "facemist.jpg", "opts": [{"label": "Unidad", "price": 20}], "desc": "Bruma facial que hidrata y calma, 2 oz."}, {"id": "r4", "cat": "rostro", "tag": "04 Tratar", "name": "Sérum facial", "sub": "Rosa mosqueta · 1 oz", "img": "serum.jpg", "opts": [{"label": "Unidad", "price": 30}], "desc": "Sérum facial de rosa mosqueta, 1 oz."}, {"id": "r5", "cat": "rostro", "tag": "05 Contorno", "name": "Eye Serum", "sub": "Cafeína · 10 ml", "img": "eye.jpg", "opts": [{"label": "Unidad", "price": 15}], "desc": "Sérum de contorno de ojos con cafeína, 10 ml."}, {"id": "r6", "cat": "rostro", "tag": "06 Hidratar", "name": "Hidratante facial", "sub": "Retinol natural · 2 oz", "img": "hidratante.jpg", "opts": [{"label": "Unidad", "price": 15}], "desc": "Hidratante facial con retinol natural, 2 oz."}, {"id": "r7", "cat": "rostro", "tag": "07 Labios · precio c/u", "name": "Scrub y bálsamo", "sub": "Exfolia y nutre", "img": "labios.jpg", "opts": [{"label": "Unidad", "price": 5}], "varName": "Tipo", "vars": ["Scrub labial", "Bálsamo labial"], "desc": "Exfolia y nutre tus labios. Precio por unidad."}, {"id": "r8", "cat": "rostro", "tag": "08 Mascarilla · 5 tipos", "name": "Arcillas", "sub": "2 oz", "img": "arcillas.jpg", "opts": [{"label": "Unidad", "price": 20}], "varName": "Arcilla", "vars": ["Bentonita · piel grasa o mixta", "Verde francesa · piel grasa o mixta", "Rosada · piel sensible o seca", "Caolín blanca · piel sensible", "Marina · todo tipo de piel"], "desc": "Mascarilla de arcilla, 2 oz. Elige la ideal para tu piel."}, {"id": "h1", "cat": "cabello", "tag": "El más pedido · 2 oz", "name": "Hair Oil", "sub": "Aceite capilar", "img": "hairoil.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 35}], "desc": "Crecimiento, hidratación y reparación. En raíz antes de lavar, o en puntas para dar brillo. Semilla de calabaza, romero, menta, lavanda, argán, jojoba y ricino."}, {"id": "h2", "cat": "cabello", "tag": "Anti-frizz · 2 oz", "name": "Hair Styling Balm", "sub": "Para el día a día", "img": "stylingbalm.jpg", "opts": [{"label": "Unidad", "price": 15}], "desc": "Bálsamo anti-frizz para el día a día, 2 oz."}, {"id": "h3", "cat": "cabello", "tag": "Barba · 2 oz", "name": "Beard Balm", "sub": "Hidrata y moldea", "img": "beard.jpg", "opts": [{"label": "Unidad", "price": 15}], "desc": "Bálsamo para barba que hidrata y moldea, 2 oz."}, {"id": "h4", "cat": "cabello", "tag": "Cera · 0,5 oz", "name": "Slick Back Stick", "sub": "Para peinados", "img": "slick.jpg", "opts": [{"label": "Unidad", "price": 12}], "desc": "Cera en barra para peinados, 0,5 oz."}, {"id": "h5", "cat": "cabello", "tag": "Arcilla moldeadora", "name": "Styling Clay", "sub": "Acabado mate", "img": "clay.jpg", "opts": [{"label": "Unidad", "price": 15}], "desc": "Arcilla moldeadora con acabado mate."}, {"id": "v1", "cat": "hogar", "tag": "Soya y coco", "name": "Vela de soya", "sub": "Variedad de fragancias", "img": "vela.jpg", "rect": true, "optName": "Tamaño", "opts": [{"label": "4 oz", "price": 15}, {"label": "8 oz", "price": 20}, {"label": "16 oz con cajita de regalo", "price": 35}], "desc": "Nuestra mezcla original de cera de soya y coco, vertida a mano. Indica tu fragancia preferida en las notas del pedido."}, {"id": "v2", "cat": "hogar", "tag": "A pedido", "name": "Velas esculturales", "sub": "Diseño y fragancia a elección", "img": "", "consult": true, "priceLabel": "Según modelo"}, {"id": "k1", "cat": "regalos", "tag": "Kit de regalo", "name": "Cinco piezas", "sub": "Butter, soufflé, scrub, bálsamo y jabón", "img": "k_cinco.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 55}], "desc": "Butter, soufflé, scrub, bálsamo y jabón. Listo para regalar."}, {"id": "k2", "cat": "regalos", "tag": "Kit de regalo", "name": "Jabón + jabonera", "sub": "Madera o sisal", "img": "k_jabonera.jpg", "rect": true, "optName": "Jaboneras", "opts": [{"label": "1 jabonera", "price": 15}, {"label": "2 jaboneras", "price": 20}], "varName": "Jabonera", "vars": ["Madera", "Sisal"], "desc": "Jabón artesanal con jabonera de madera o sisal."}, {"id": "k3", "cat": "regalos", "tag": "Kit de regalo", "name": "Caja de pino", "sub": "4 jabones a elección", "img": "k_pino.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 40}], "desc": "Caja de pino con 4 jabones a elección. Indica tus jabones en las notas del pedido."}, {"id": "k4", "cat": "regalos", "tag": "Kit de regalo", "name": "Trío de velas", "sub": "3 velas de 4 oz", "img": "k_velas.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 40}], "desc": "Tres velas de soya de 4 oz."}, {"id": "k5", "cat": "regalos", "tag": "Kit de regalo", "name": "Kit arcilla", "sub": "Bowl, cucharita y brocha", "img": "k_arcilla.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 40}], "desc": "Arcilla con bowl, cucharita y brocha."}, {"id": "k6", "cat": "regalos", "tag": "Kit de regalo", "name": "Face Bar + cepillo", "sub": "Para dry brushing facial", "img": "k_facebar.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 25}], "desc": "Face Bar con cepillo para dry brushing facial."}, {"id": "k7", "cat": "regalos", "tag": "Kit de regalo", "name": "Sérum + gua sha", "sub": "Drenaje facial · bolsita de lino", "img": "k_serum.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 40}], "desc": "Sérum facial con gua sha para drenaje facial, en bolsita de lino."}, {"id": "k8", "cat": "regalos", "tag": "Kit de regalo", "name": "Hair Oil + gua sha", "sub": "Con masajeador capilar de madera", "img": "k_hairoil.jpg", "rect": true, "opts": [{"label": "Unidad", "price": 45}], "desc": "Hair Oil con 1 masajeador capilar de madera."}, {"id": "k9", "cat": "regalos", "tag": "Mix & Match", "name": "Arma tu kit", "sub": "Precio según contenido", "img": "", "consult": true, "priceLabel": "Según contenido"}];
+const CATS = [
+  { id: 'all', label: 'Todo' }, { id: 'jabones', label: 'Jabones' }, { id: 'cuerpo', label: 'Cuerpo' },
+  { id: 'rostro', label: 'Rostro y labios' }, { id: 'cabello', label: 'Cabello y barba' },
+  { id: 'hogar', label: 'Velas' }, { id: 'regalos', label: 'Regalos' }
+];
+const DEALS = {
+  jabon: { label: 'Promo jabones (2 × $18 · 3 × $25)', unit: 9.5, deals: [{ n: 2, price: 18 }, { n: 3, price: 25 }] },
+  perfume: { label: 'Promo Perfume Oil (2 × $28)', unit: 15, deals: [{ n: 2, price: 28 }] }
+};
+const ESTADOS_VE = ['Amazonas','Anzoátegui','Apure','Aragua','Barinas','Bolívar','Carabobo','Cojedes','Delta Amacuro','Distrito Capital','Falcón','Guárico','La Guaira','Lara','Mérida','Miranda','Monagas','Nueva Esparta','Portuguesa','Sucre','Táchira','Trujillo','Yaracuy','Zulia'];
+
+const BY_ID = {}; CATALOG.forEach(p => BY_ID[p.id] = p);
+const IMG = f => 'images/' + f;
+const LOGO = IMG('logo.jpg');
+
+// ====== ESTADO ======
+const s = {
+  screen: 'shop', cat: 'all', cart: {}, sheet: null,
+  f: { nombre: '', telefono: '', direccion: '', referencia: '', cedula: '', estado: '', ciudad: '', agencia: '', notas: '' },
+  metodo: 'yalo', banda: '', pago: '', orden: '', geoMsg: '', copied: '', err: '', sending: false, waLink: '',
+  stock: {}, cfg: { tasa: 982, tasaFecha: '13/10/2026', yaloBase: 4, yalo36: 2, yalo614: 3, yaloCada4: 1 }
+};
+try { const c = JSON.parse(localStorage.getItem('vr_cart') || '{}'); if (c && typeof c === 'object') s.cart = c; } catch (e) {}
+try { const f = JSON.parse(localStorage.getItem('vr_datos') || 'null'); if (f) Object.assign(s.f, f, { notas: '' }); } catch (e) {}
+function save() {
+  try { localStorage.setItem('vr_cart', JSON.stringify(s.cart)); localStorage.setItem('vr_datos', JSON.stringify(s.f)); } catch (e) {}
+}
+
+// ====== UTILIDADES ======
+const esc = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const usd = n => '$' + (Math.round(n * 100) % 100 === 0 ? n.toFixed(0) : n.toFixed(2).replace('.', ','));
+const bs = n => 'Bs. ' + (n * s.cfg.tasa).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const showBs = () => s.cfg.tasa > 0;
+const wa = t => 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(t);
+const sku = (p, oi, vi) => p.id + '-' + oi + '-' + vi;
+const stockOf = k => (k in s.stock) ? s.stock[k] : Infinity;
+const left = k => stockOf(k) - (s.cart[k] || 0);
+const skusOf = p => { const out = []; (p.opts || []).forEach((o, oi) => (p.vars || ['']).forEach((v, vi) => out.push(sku(p, oi, vi)))); return out; };
+const isSimple = p => !p.consult && p.opts.length === 1 && !p.vars;
+const soldOut = p => !p.consult && skusOf(p).every(k => stockOf(k) <= 0);
+const filled = v => String(v || '').trim().length > 0;
+const ICON = {
+  back: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>',
+  bag: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>',
+  pin: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  wa: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>',
+  x: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+};
+
+function bestPrice(n, unit, deals) {
+  const dp = [0];
+  for (let i = 1; i <= n; i++) { let b = dp[i - 1] + unit; deals.forEach(d => { if (i >= d.n) b = Math.min(b, dp[i - d.n] + d.price); }); dp[i] = b; }
+  return dp[n];
+}
+
+// ====== CÁLCULOS ======
+function bands() {
+  const c = s.cfg;
+  return [
+    { id: 'b1', label: 'Hasta 3 km · Oripoto, El Hatillo, La Boyera, La Lagunita', max: 3, price: c.yaloBase, wide: true },
+    { id: 'b2', label: '3 a 6 km', max: 6, price: c.yaloBase + c.yalo36 },
+    { id: 'b3', label: '6 a 14 km', max: 14, price: c.yaloBase + c.yalo614 },
+    { id: 'b4', label: '14 a 18 km', max: 18, price: c.yaloBase + c.yalo614 + c.yaloCada4 },
+    { id: 'b5', label: '18 a 22 km', max: 22, price: c.yaloBase + c.yalo614 + 2 * c.yaloCada4 },
+    { id: 'b6', label: '22 a 26 km', max: 26, price: c.yaloBase + c.yalo614 + 3 * c.yaloCada4 },
+    { id: 'b7', label: '26 a 30 km', max: 30, price: c.yaloBase + c.yalo614 + 4 * c.yaloCada4 },
+    { id: 'b8', label: 'Más de 30 km o no sé', max: 1e9, price: 0, quote: true }
+  ];
+}
+
+function lines() {
+  return Object.keys(s.cart).filter(k => s.cart[k] > 0 && BY_ID[k.split('-')[0]]).map(k => {
+    const [id, oi, vi] = k.split('-');
+    const p = BY_ID[id], o = p.opts[+oi] || p.opts[0], v = p.vars ? p.vars[+vi] : '';
+    const bits = []; if (p.opts.length > 1) bits.push(o.label); if (v) bits.push(v);
+    return { k, p, qty: s.cart[k], price: o.price, bits, full: p.name + (bits.length ? ' (' + bits.join(', ') + ')' : '') };
+  });
+}
+
+function totals() {
+  const L = lines();
+  const count = L.reduce((a, l) => a + l.qty, 0);
+  const gross = L.reduce((a, l) => a + l.qty * l.price, 0);
+  const promos = [];
+  Object.keys(DEALS).forEach(dk => {
+    const d = DEALS[dk], n = L.filter(l => l.p.deal === dk).reduce((a, l) => a + l.qty, 0);
+    if (n >= 2) { const save = n * d.unit - bestPrice(n, d.unit, d.deals); if (save > 0.001) promos.push({ label: d.label, amt: save }); }
+  });
+  const subtotal = gross - promos.reduce((a, p) => a + p.amt, 0);
+  const yalo = s.metodo === 'yalo', carrier = s.metodo === 'zoom' ? 'Zoom' : 'MRW';
+  const band = bands().find(b => b.id === s.banda);
+  let fee = 0, feeTxt, envio;
+  if (yalo) { fee = band && !band.quote ? band.price : 0; feeTxt = fee > 0 ? usd(fee) : 'Por confirmar'; envio = 'Yalo' + (band ? ' (' + band.label.split(' · ')[0] + ')' : ''); }
+  else { feeTxt = 'Cobro a destino'; envio = carrier; }
+  const total = subtotal + fee;
+  const totalLabel = yalo && fee === 0 ? 'Total (sin envío)' : 'Total';
+  const f = s.f;
+  const destino = yalo ? (f.direccion + (f.referencia ? ' (Ref: ' + f.referencia + ')' : '') + ', Caracas')
+    : ('Oficina ' + carrier + ' ' + f.agencia + ', ' + f.ciudad + ', ' + f.estado);
+  return { L, count, gross, promos, subtotal, fee, feeTxt, envio, total, totalLabel, destino, yalo, carrier };
+}
+
+function deliveryOk() {
+  const f = s.f; let ok = filled(f.nombre) && filled(f.telefono);
+  if (s.metodo === 'yalo') ok = ok && !!s.banda && filled(f.direccion);
+  else ok = ok && filled(f.cedula) && filled(f.estado) && filled(f.ciudad) && filled(f.agencia);
+  return ok;
+}
+
+const PAGO_LABEL = { zelle: 'Zelle', pagomovil: 'Pago Móvil', paypal: 'PayPal', efectivo: 'Efectivo al recibir' };
+
+function waMessage(orden, t) {
+  const f = s.f, L = [];
+  L.push('¡Hola, The Vintage Rabbit Co.! Quiero hacer este pedido:');
+  L.push('Pedido ' + orden); L.push('');
+  t.L.forEach(l => L.push('• ' + l.qty + ' × ' + l.full + ' — ' + usd(l.qty * l.price)));
+  t.promos.forEach(p => L.push('• ' + p.label + ': −' + usd(p.amt)));
+  L.push('');
+  L.push('Subtotal: ' + usd(t.subtotal));
+  L.push('Envío: ' + t.envio + ' — ' + t.feeTxt);
+  L.push(t.totalLabel + ': ' + usd(t.total) + (showBs() ? ' (' + bs(t.total) + ')' : ''));
+  L.push('Método de pago: ' + (PAGO_LABEL[s.pago] || '')); L.push('');
+  L.push('Nombre: ' + f.nombre); L.push('Teléfono: ' + f.telefono);
+  if (!t.yalo) L.push('Cédula: ' + f.cedula);
+  L.push('Entrega: ' + t.destino);
+  if (filled(f.notas)) L.push('Notas: ' + f.notas);
+  L.push(''); L.push(s.pago === 'efectivo' ? 'Pagaré en efectivo al recibir.' : 'Adjunto la captura de mi pago.');
+  return L.join('\n');
+}
+
+// ====== RENDER ======
+function thumb(p, cls) {
+  return p.img ? '<img class="' + cls + '" src="' + IMG(p.img) + '" alt="">' : '<div class="mk"><img src="' + LOGO + '" alt=""></div>';
+}
+
+function renderHeader(t) {
+  const titles = { cart: 'Tu carrito', delivery: 'Entrega', pay: 'Pago', done: 'Pedido listo' };
+  const left = s.screen === 'shop'
+    ? '<img class="logo" src="' + LOGO + '" alt=""><div class="brand"><b>The Vintage Rabbit Co</b><span>@thevintagerabbit.co</span></div>'
+    : '<button class="icon-btn" data-act="back" aria-label="Volver" style="margin-left:-8px">' + ICON.back + '</button><div class="title">' + titles[s.screen] + '</div>';
+  return '<header>' + left + '<button class="icon-btn cart-btn" data-act="go" data-to="cart" aria-label="Ver carrito">' + ICON.bag +
+    (t.count ? '<span class="badge">' + t.count + '</span>' : '') + '</button></header>';
+}
+
+function renderSteps() {
+  const idx = { cart: 0, delivery: 1, pay: 2 }[s.screen];
+  if (idx === undefined) return '';
+  return '<div class="steps">' + ['Carrito', 'Entrega', 'Pago'].map((l, i) => '<div><i class="' + (i <= idx ? 'on' : '') + '"></i>' + l + '</div>').join('') + '</div>';
+}
+
+function renderCard(p) {
+  const so = soldOut(p);
+  const prices = p.consult ? [] : p.opts.map(o => o.price);
+  const min = prices.length ? Math.min(...prices) : 0;
+  const varied = prices.length > 1 && Math.max(...prices) !== min;
+  let ph;
+  if (p.img && p.rect) ph = '<img class="rect" src="' + IMG(p.img) + '" alt="' + esc(p.name) + '" loading="lazy">';
+  else if (p.img) ph = '<img class="round" src="' + IMG(p.img) + '" alt="' + esc(p.name) + '" loading="lazy">';
+  else ph = '<div class="mark"><img src="' + LOGO + '" alt=""></div>';
+  let action;
+  if (p.consult) action = '<a class="btn-o" href="' + esc(wa('¡Hola, The Vintage Rabbit Co.! Quiero consultar por: ' + p.name)) + '" target="_blank" rel="noopener">Consultar</a>';
+  else if (so) action = '<button class="btn" disabled>Agotado</button>';
+  else if (isSimple(p)) {
+    const k = sku(p, 0, 0), q = s.cart[k] || 0;
+    action = q > 0
+      ? '<div class="stepper"><button data-act="dec" data-k="' + k + '" aria-label="Quitar uno">−</button><span>' + q + '</span><button data-act="inc" data-k="' + k + '" aria-label="Agregar uno"' + (left(k) <= 0 ? ' disabled' : '') + '>+</button></div>'
+      : '<button class="btn" data-act="inc" data-k="' + k + '">Agregar</button>';
+  } else action = '<button class="btn" data-act="open" data-id="' + p.id + '">Elegir opciones</button>';
+  const priceTxt = p.consult ? p.priceLabel : (varied ? 'desde ' + usd(min) : usd(min));
+  return '<article class="card' + (so ? ' soldout' : '') + '"><div class="ph">' + (so ? '<span class="so-tag">Agotado</span>' : '') + ph + '</div><div class="cb">' +
+    '<div class="tag">' + esc(p.tag) + '</div><div class="name">' + esc(p.name) + '</div><div class="sub">' + esc(p.sub) + '</div>' +
+    '<div class="price"><b>' + priceTxt + '</b>' + (showBs() && !p.consult ? '<small>' + bs(min) + '</small>' : '') + '</div>' + action + '</div></article>';
+}
+
+function renderShop() {
+  const list = CATALOG.filter(p => s.cat === 'all' || p.cat === s.cat);
+  return '<section class="hero"><img src="' + IMG('hero.jpg') + '" alt="Jabones artesanales apilados junto a plantas">' +
+    '<h1>Cuidado <em>botánico,</em> hecho a mano</h1><p>Productos naturales, hechos 100% a mano en Caracas. Vegano · Cruelty-free · Orgánico · Sin parabenos · GMO-free</p></section>' +
+    '<nav class="cats" aria-label="Categorías">' + CATS.map(c => '<button class="chip' + (s.cat === c.id ? ' on' : '') + '" data-act="cat" data-id="' + c.id + '" aria-pressed="' + (s.cat === c.id) + '">' + c.label + '</button>').join('') + '</nav>' +
+    (showBs() ? '<div class="rate">Precios en USD · bolívares a tasa oficial BCV del euro: Bs. ' + s.cfg.tasa.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + (s.cfg.tasaFecha ? ' (' + esc(s.cfg.tasaFecha) + ')' : '') + '</div>' : '') +
+    '<div class="grid">' + list.map(renderCard).join('') + '</div>';
+}
+
+function renderSummaryRows(t) {
+  return t.promos.map(p => '<div class="row promo"><span>' + p.label + '</span><span>−' + usd(p.amt) + '</span></div>').join('');
+}
+
+function renderCart(t) {
+  if (!t.count) return '<section class="done"><h2>Tu carrito está vacío</h2><button class="cta" style="width:auto;padding:0 26px;height:48px" data-act="go" data-to="shop">Ver productos</button></section>';
+  return '<section class="sec" style="gap:10px">' + (s.err ? '<div class="err">' + esc(s.err) + '</div>' : '') + t.L.map(l => {
+    const lim = left(l.k) <= 0;
+    return '<div class="line">' + thumb(l.p, 'th') + '<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><div class="name" style="font-size:18px">' + esc(l.p.name) + '</div>' +
+      '<div class="sub">' + esc((l.bits.length ? l.bits.join(' · ') + ' · ' : '') + usd(l.price) + ' c/u') + '</div>' +
+      '<div class="qty"><button data-act="dec" data-k="' + l.k + '" aria-label="Quitar uno">−</button><span>' + l.qty + '</span><button data-act="inc" data-k="' + l.k + '" aria-label="Agregar uno"' + (lim ? ' disabled' : '') + '>+</button></div>' +
+      (lim && isFinite(stockOf(l.k)) ? '<div class="left">Máximo disponible</div>' : '') +
+      '</div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><b>' + usd(l.qty * l.price) + '</b><button class="link" data-act="rm" data-k="' + l.k + '">Eliminar</button></div></div>';
+  }).join('') +
+    '<div class="sum" style="padding:14px 4px 0"><div class="row"><span>Productos</span><span>' + usd(t.gross) + '</span></div>' + renderSummaryRows(t) +
+    '<div class="row big" style="font-size:16px"><span>Subtotal</span><span>' + usd(t.subtotal) + '</span></div>' +
+    (showBs() ? '<div class="row" style="justify-content:flex-end;font-size:12px;color:var(--muted)">' + bs(t.subtotal) + '</div>' : '') +
+    '<div class="hint">El envío se calcula en el siguiente paso.</div></div></section>';
+}
+
+function field(k, label, attrs) {
+  return '<label class="f">' + label + '<input data-f="' + k + '" value="' + esc(s.f[k]) + '" ' + (attrs || '') + '></label>';
+}
+
+function renderDelivery(t) {
+  const c = s.cfg;
+  const M = [
+    { id: 'yalo', label: 'Delivery en Caracas', sub: 'Con Yalo · desde ' + usd(c.yaloBase) },
+    { id: 'mrw', label: 'Envío nacional MRW', sub: 'Cobro a destino' },
+    { id: 'zoom', label: 'Envío nacional Zoom', sub: 'Cobro a destino' }
+  ];
+  let h = '<section class="sec"><div class="grp"><h2>Tus datos</h2>' +
+    field('nombre', 'Nombre y apellido *', 'type="text" autocomplete="name" placeholder="Ej. María Pérez"') +
+    field('telefono', 'Teléfono / WhatsApp *', 'type="tel" autocomplete="tel" placeholder="0412 000 0000"') + '</div>' +
+    '<div class="grp"><h2>¿Cómo recibes tu pedido?</h2>' + M.map(m => '<button class="opt' + (s.metodo === m.id ? ' on' : '') + '" data-act="metodo" data-id="' + m.id + '" aria-pressed="' + (s.metodo === m.id) + '"><span class="dot"></span><span><b>' + m.label + '</b><small>' + m.sub + '</small></span></button>').join('') + '</div>';
+  if (t.yalo) {
+    h += '<div class="grp"><h2>Distancia de entrega</h2><div class="hint">' + usd(c.yaloBase) + ' dentro de 3 km (Oripoto, El Hatillo, La Boyera, La Lagunita). Más lejos: ' + usd(c.yaloBase + c.yalo36) + ' hasta 6 km, ' + usd(c.yaloBase + c.yalo614) + ' hasta 14 km, y ' + usd(c.yaloCada4) + ' más por cada 4 km adicionales. Distancia desde El Hatillo; si no estás seguro, elige la más cercana y te confirmamos por WhatsApp.</div>' +
+      '<button class="geo" data-act="geo">' + ICON.pin + 'Calcular con mi ubicación</button>' + (s.geoMsg ? '<div class="hint" style="color:var(--muted2)">' + esc(s.geoMsg) + '</div>' : '') +
+      '<div class="bands">' + bands().map(b => '<button class="band' + (s.banda === b.id ? ' on' : '') + (b.wide ? ' wide' : '') + '" data-act="band" data-id="' + b.id + '" aria-pressed="' + (s.banda === b.id) + '"><b style="font-weight:' + (s.banda === b.id ? 600 : 500) + '">' + b.label + '</b><small>' + (b.quote ? 'Te confirmamos' : usd(b.price)) + '</small></button>').join('') + '</div>' +
+      field('direccion', 'Dirección completa *', 'type="text" autocomplete="street-address" placeholder="Urbanización, calle, edificio/casa, piso, apto."') +
+      field('referencia', 'Punto de referencia', 'type="text" placeholder="Ej. frente a la panadería"') + '</div>';
+  } else {
+    h += '<div class="grp"><h2>Envío por ' + t.carrier + '</h2><div class="hint">Cobro a destino: pagas el envío directamente en la oficina de ' + t.carrier + ' al retirar. Lleva tu cédula.</div>' +
+      field('cedula', 'Cédula de identidad *', 'type="text" placeholder="V-12345678"') +
+      '<label class="f">Estado *<select data-f="estado"><option value="">Selecciona tu estado</option>' + ESTADOS_VE.map(e => '<option' + (s.f.estado === e ? ' selected' : '') + '>' + e + '</option>').join('') + '</select></label>' +
+      field('ciudad', 'Ciudad *', 'type="text" autocomplete="address-level2" placeholder="Ej. Valencia"') +
+      field('agencia', 'Oficina ' + t.carrier + ' de destino *', 'type="text" placeholder="Nombre o dirección de la oficina"') + '</div>';
+  }
+  h += field('notas', 'Notas del pedido (opcional)', 'type="text" placeholder="Aromas preferidos, mensaje de regalo…"') + '</section>';
+  return h;
+}
+
+function payBox(t) {
+  const copyBtn = (key, txt) => '<button class="copy" data-act="copy" data-key="' + key + '">' + (s.copied === key ? 'Copiado ✓' : txt) + '</button>';
+  switch (s.pago) {
+    case 'zelle': return '<div class="paybox"><div class="k">Zelle</div><div style="font-size:15px;word-break:break-all">marvinschultz1@gmail.com</div><div class="m">Monto a enviar: <b>' + usd(t.total) + '</b></div>' + copyBtn('zelle', 'Copiar correo') + '</div>';
+    case 'pagomovil': return '<div class="paybox"><div class="k">Pago Móvil</div><div>Banco: Banesco</div><div>Teléfono: 0424 165 6456</div><div>Cédula: E-84577902</div><div class="m">Monto a transferir: <b>' + (showBs() ? bs(t.total) : usd(t.total) + ' a la tasa del día') + '</b></div>' + copyBtn('pm', 'Copiar datos') + '</div>';
+    case 'paypal': return '<div class="paybox"><div class="k">PayPal</div><div style="font-size:15px">@marvinschultz19</div><div class="m" style="word-break:break-all">o al correo marvinschultz1@gmail.com</div><div class="m">Monto a enviar: <b>' + usd(t.total) + '</b></div>' + copyBtn('paypal', 'Copiar usuario') + '</div>';
+    case 'efectivo': return '<div class="paybox"><div class="k">Efectivo</div><div>Pagas al recibir tu pedido en Caracas. Si necesitas cambio, indícalo por WhatsApp.</div></div>';
+  }
+  return '';
+}
+
+function renderPay(t) {
+  const P = [{ id: 'zelle', label: 'Zelle' }, { id: 'pagomovil', label: 'Pago Móvil' }, { id: 'paypal', label: 'PayPal' }];
+  if (t.yalo) P.push({ id: 'efectivo', label: 'Efectivo' });
+  return '<section class="sec">' + (s.err ? '<div class="err">' + esc(s.err) + '</div>' : '') +
+    '<div class="grp"><h2>Método de pago</h2><div class="pays">' + P.map(p => '<button class="pay' + (s.pago === p.id ? ' on' : '') + '" data-act="pago" data-id="' + p.id + '" aria-pressed="' + (s.pago === p.id) + '">' + p.label + '</button>').join('') + '</div>' +
+    (!t.yalo ? '<div class="hint">Pago en efectivo disponible solo para entregas en Caracas.</div>' : '') + '</div>' + payBox(t) +
+    '<div class="box"><h2 style="font-size:20px">Resumen del pedido</h2>' +
+    t.L.map(l => '<div class="row" style="font-size:13px"><span>' + l.qty + ' × ' + esc(l.full) + '</span><span>' + usd(l.qty * l.price) + '</span></div>').join('') +
+    renderSummaryRows(t) + '<div class="hr"></div>' +
+    '<div class="row"><span>Subtotal</span><span>' + usd(t.subtotal) + '</span></div>' +
+    '<div class="row"><span>Envío · ' + esc(t.envio) + '</span><span>' + t.feeTxt + '</span></div>' +
+    '<div class="row big"><span>' + t.totalLabel + '</span><span>' + usd(t.total) + '</span></div>' +
+    (showBs() ? '<div class="row" style="justify-content:flex-end;font-size:12px;color:var(--muted)">' + bs(t.total) + '</div>' : '') +
+    '<div class="hint" style="margin-top:4px">Entregar a: ' + esc(t.destino) + '</div></div>' +
+    '<div class="hint" style="font-size:13px;color:var(--muted2)">Al tocar el botón se abre WhatsApp con tu pedido listo. Envíalo y adjunta la captura de tu pago para confirmarlo.</div></section>';
+}
+
+function renderDone() {
+  return '<section class="done"><div class="mk"><img src="' + LOGO + '" alt=""></div><h2>¡Gracias por tu pedido!</h2><p>Pedido <b>' + esc(s.orden) + '</b></p>' +
+    '<p>Envía el mensaje en WhatsApp con la captura de tu pago. Te confirmamos y coordinamos la entrega.</p>' +
+    '<a class="btn-o" style="width:auto;padding:0 24px;height:48px;border-radius:24px" href="' + esc(s.waLink) + '">Abrir WhatsApp de nuevo</a>' +
+    '<button class="link" style="font-size:14px;color:var(--muted2)" data-act="new">Volver a la tienda</button></section>';
+}
+
+function renderBar(t) {
+  if (s.sheet) return '';
+  if (s.screen === 'shop' && t.count) return '<div class="bar float"><button class="cta split" data-act="go" data-to="cart"><span>Ver carrito (' + t.count + ')</span><span>' + usd(t.subtotal) + '</span></button></div>';
+  if (s.screen === 'cart' && t.count) return '<div class="bar"><button class="cta" data-act="go" data-to="delivery">Continuar a la entrega</button></div>';
+  if (s.screen === 'delivery') return '<div class="bar"><div class="note" id="dnote"' + (deliveryOk() ? ' hidden' : '') + '>Completa los campos marcados con *</div><button class="cta" id="dcta" data-act="go" data-to="pay"' + (deliveryOk() ? '' : ' disabled') + '>Continuar al pago</button></div>';
+  if (s.screen === 'pay') return '<div class="bar">' + (s.pago ? '' : '<div class="note">Elige un método de pago</div>') +
+    '<button class="cta wa" data-act="send"' + (s.pago && !s.sending ? '' : ' disabled') + '>' + ICON.wa + (s.sending ? 'Enviando pedido…' : 'Enviar pedido por WhatsApp') + '</button></div>';
+  return '';
+}
+
+function renderSheet() {
+  const p = BY_ID[s.sheet.id]; if (!p) return '';
+  const sh = s.sheet;
+  const o = p.opts[sh.oi];
+  const vi = p.vars ? sh.vi : 0;
+  const k = (p.vars && vi < 0) ? null : sku(p, sh.oi, vi);
+  const avail = k ? left(k) : Infinity;
+  const blocked = !k || avail <= 0;
+  const optAvail = oi => (p.vars || ['']).some((v, j) => left(sku(p, oi, j)) > 0);
+  let h = '<div class="sheet-wrap"><button class="scrim" data-act="close" aria-label="Cerrar"></button><div class="sheet" role="dialog" aria-label="' + esc(p.name) + '">' +
+    '<div class="sh-head">' + thumb(p, 'th') + '<div style="flex:1;display:flex;flex-direction:column;gap:3px"><div class="tag">' + esc(p.tag) + '</div><div class="name">' + esc(p.name) + '</div></div><button class="x" data-act="close" aria-label="Cerrar">' + ICON.x + '</button></div>' +
+    '<div style="font-size:14px;color:var(--muted2);line-height:1.5">' + esc(p.desc) + '</div>';
+  if (p.opts.length > 1) h += '<div class="grp" style="gap:8px"><div class="tag" style="font-size:11px">' + esc(p.optName) + '</div><div class="pills">' +
+    p.opts.map((op, i) => '<button class="pill' + (sh.oi === i ? ' on' : '') + '" data-act="soi" data-i="' + i + '"' + (optAvail(i) ? '' : ' disabled') + '>' + esc(op.label) + ' · ' + usd(op.price) + '</button>').join('') + '</div></div>';
+  if (p.vars) h += '<div class="grp" style="gap:8px"><div class="tag" style="font-size:11px">' + esc(p.varName) + '</div><div class="pills">' +
+    p.vars.map((v, j) => '<button class="pill' + (sh.vi === j ? ' on' : '') + '" data-act="svi" data-i="' + j + '"' + (left(sku(p, sh.oi, j)) > 0 ? '' : ' disabled') + '>' + esc(v) + '</button>').join('') + '</div></div>';
+  if (k && isFinite(stockOf(k)) && avail > 0 && avail <= 5) h += '<div class="left">¡Quedan ' + avail + '!</div>';
+  if (k && avail <= 0) h += '<div class="left">Esta opción está agotada.</div>';
+  h += '<div class="addrow"><div class="qbox"><button data-act="sq" data-d="-1" aria-label="Menos">−</button><span>' + sh.qty + '</span><button data-act="sq" data-d="1" aria-label="Más"' + (sh.qty >= avail ? ' disabled' : '') + '>+</button></div>' +
+    '<button class="cta" data-act="add"' + (blocked ? ' disabled' : '') + '>Agregar · ' + usd(o.price * sh.qty) + '</button></div>';
+  if (!k) h += '<div class="note" style="font-size:12px;color:var(--muted);text-align:center">Elige ' + esc(p.varName.toLowerCase()) + ' para continuar</div>';
+  return h + '</div></div>';
+}
+
+let lastScreen = '';
+function render() {
+  const app = document.getElementById('app');
+  const main = app.querySelector('main');
+  const keep = main && lastScreen === s.screen ? main.scrollTop : 0;
+  const t = totals();
+  let body = '';
+  if (s.screen === 'shop') body = renderShop();
+  else if (s.screen === 'cart') body = renderCart(t);
+  else if (s.screen === 'delivery') body = renderDelivery(t);
+  else if (s.screen === 'pay') body = renderPay(t);
+  else body = renderDone();
+  app.innerHTML = renderHeader(t) + renderSteps() + '<main>' + body + '</main>' + renderBar(t) + (s.sheet ? renderSheet() : '');
+  app.querySelector('main').scrollTop = keep;
+  lastScreen = s.screen;
+}
+
+// ====== ACCIONES ======
+function setQty(k, q) {
+  q = Math.max(0, Math.min(q, stockOf(k)));
+  if (q <= 0) delete s.cart[k]; else s.cart[k] = q;
+  save();
+}
+function go(screen) { s.err = ''; s.screen = screen; if (screen !== 'shop') s.sheet = null; }
+
+function useGeo() {
+  if (!navigator.geolocation) { s.geoMsg = 'Tu navegador no permite ubicación. Elige la distancia abajo.'; render(); return; }
+  s.geoMsg = 'Buscando tu ubicación…'; render();
+  navigator.geolocation.getCurrentPosition(pos => {
+    const R = 6371, r = d => d * Math.PI / 180;
+    const dLat = r(pos.coords.latitude - SHOP.lat), dLng = r(pos.coords.longitude - SHOP.lng);
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(r(SHOP.lat)) * Math.cos(r(pos.coords.latitude)) * Math.sin(dLng / 2) ** 2;
+    const km = 2 * R * Math.asin(Math.sqrt(a));
+    const b = bands().find(x => km <= x.max);
+    s.banda = b.id;
+    s.geoMsg = 'Estás a unos ' + km.toFixed(1).replace('.', ',') + ' km en línea recta. Seleccionamos tu tarifa; Yalo puede ajustarla según la ruta.';
+    render();
+  }, () => { s.geoMsg = 'No pudimos obtener tu ubicación. Elige la distancia abajo.'; render(); }, { enableHighAccuracy: true, timeout: 12000 });
+}
+
+function copy(key) {
+  const txt = { zelle: 'marvinschultz1@gmail.com', pm: 'Banesco 04241656456 E-84577902', paypal: '@marvinschultz19' }[key];
+  const done = () => { s.copied = key; render(); setTimeout(() => { if (s.copied === key) { s.copied = ''; render(); } }, 1800); };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, () => { fallbackCopy(txt); done(); });
+    else { fallbackCopy(txt); done(); }
+  } catch (e) { fallbackCopy(txt); done(); }
+}
+function fallbackCopy(txt) {
+  try { const ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); } catch (e) {}
+}
+
+async function sendOrder() {
+  if (s.sending || !s.pago) return;
+  const t = totals();
+  if (!t.count) return;
+  s.sending = true; s.err = ''; render();
+  let orden = '';
+  if (API && API.indexOf('http') === 0) {
+    const payload = {
+      nombre: s.f.nombre, telefono: s.f.telefono, cedula: t.yalo ? '' : s.f.cedula,
+      entrega: t.yalo ? 'Delivery Yalo (Caracas)' : 'Envío ' + t.carrier, destino: t.destino, notas: s.f.notas,
+      pago: PAGO_LABEL[s.pago], envioTxt: t.envio + ' — ' + t.feeTxt,
+      subtotal: Math.round(t.subtotal * 100) / 100, total: Math.round(t.total * 100) / 100, totalBs: showBs() ? bs(t.total) : '',
+      promosTxt: t.promos.map(p => p.label + ': −' + usd(p.amt)).join(' · '),
+      items: t.L.map(l => ({ sku: l.k, nombre: l.full, qty: l.qty, precio: l.price }))
+    };
+    try {
+      const ctrl = new AbortController(); const timer = setTimeout(() => ctrl.abort(), 15000);
+      const res = await fetch(API, { method: 'POST', body: JSON.stringify(payload), signal: ctrl.signal });
+      clearTimeout(timer);
+      const j = await res.json();
+      if (j.ok) orden = j.orden;
+      else if (j.agotados) {
+        s.stock = j.stock || s.stock;
+        Object.keys(s.cart).forEach(k => setQty(k, s.cart[k]));
+        s.err = 'Lo sentimos: algunos productos se agotaron mientras comprabas. Ajustamos tu carrito a lo disponible; revísalo antes de continuar.';
+        s.sending = false; s.screen = 'cart'; render(); return;
+      }
+    } catch (e) { /* sin conexión con la hoja: el pedido igual llega por WhatsApp */ }
+  }
+  if (!orden) orden = 'VR-W' + String(Date.now()).slice(-5);
+  const link = wa(waMessage(orden, t));
+  s.orden = orden; s.waLink = link; s.sending = false; s.screen = 'done'; s.cart = {}; s.pago = ''; save(); render();
+  window.location.href = link;
+}
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el || el.disabled) return;
+  const a = el.dataset.act, d = el.dataset;
+  switch (a) {
+    case 'cat': {
+      s.cat = d.id; render();
+      const m = document.querySelector('main'), hero = document.querySelector('.hero');
+      if (hero && m.scrollTop > hero.offsetHeight) m.scrollTop = hero.offsetHeight;
+      return;
+    }
+    case 'go': if (d.to === 'pay' && !deliveryOk()) return; go(d.to); break;
+    case 'back': go({ cart: 'shop', delivery: 'cart', pay: 'delivery', done: 'shop' }[s.screen] || 'shop'); break;
+    case 'inc': setQty(d.k, (s.cart[d.k] || 0) + 1); break;
+    case 'dec': setQty(d.k, (s.cart[d.k] || 0) - 1); break;
+    case 'rm': setQty(d.k, 0); break;
+    case 'open': {
+      const p = BY_ID[d.id]; let oi = p.opts.findIndex((o, i) => (p.vars || ['']).some((v, j) => left(sku(p, i, j)) > 0));
+      s.sheet = { id: d.id, oi: Math.max(0, oi), vi: -1, qty: 1 };
+      if (!p.vars) s.sheet.vi = 0; break;
+    }
+    case 'close': s.sheet = null; break;
+    case 'soi': s.sheet.oi = +d.i; s.sheet.qty = 1; break;
+    case 'svi': s.sheet.vi = +d.i; s.sheet.qty = 1; break;
+    case 'sq': s.sheet.qty = Math.max(1, s.sheet.qty + (+d.d)); break;
+    case 'add': {
+      const p = BY_ID[s.sheet.id], k = sku(p, s.sheet.oi, p.vars ? s.sheet.vi : 0);
+      setQty(k, (s.cart[k] || 0) + s.sheet.qty); s.sheet = null; break;
+    }
+    case 'metodo': s.metodo = d.id; if (d.id !== 'yalo' && s.pago === 'efectivo') s.pago = ''; break;
+    case 'band': s.banda = d.id; break;
+    case 'geo': useGeo(); return;
+    case 'pago': s.pago = d.id; break;
+    case 'copy': copy(d.key); return;
+    case 'send': sendOrder(); return;
+    case 'new': s.screen = 'shop'; s.orden = ''; s.banda = ''; break;
+  }
+  render();
+});
+
+// Form fields update state without re-rendering, so typing and focus are never interrupted.
+function onField(e) {
+  const k = e.target.dataset && e.target.dataset.f; if (!k) return;
+  s.f[k] = e.target.value; save();
+  const ok = deliveryOk(), btn = document.getElementById('dcta'), note = document.getElementById('dnote');
+  if (btn) btn.disabled = !ok; if (note) note.hidden = ok;
+}
+document.addEventListener('input', onField);
+document.addEventListener('change', onField);
+
+// ====== CARGA DE INVENTARIO Y AJUSTES ======
+async function loadConfig() {
+  if (!API || API.indexOf('http') !== 0) return;
+  try {
+    const res = await fetch(API + '?t=' + Date.now());
+    const j = await res.json();
+    if (!j.ok) return;
+    s.stock = j.stock || {};
+    ['tasa', 'yaloBase', 'yalo36', 'yalo614', 'yaloCada4'].forEach(k => { if (typeof j[k] === 'number' && !isNaN(j[k])) s.cfg[k] = j[k]; });
+    if (j.tasaFecha) s.cfg.tasaFecha = j.tasaFecha;
+    Object.keys(s.cart).forEach(k => setQty(k, s.cart[k]));
+    render();
+  } catch (e) { /* la tienda funciona igual sin la hoja */ }
+}
+
+render();
+loadConfig();
+</script>
+</body>
+</html>
